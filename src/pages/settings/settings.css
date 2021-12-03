@@ -72,13 +72,6 @@
     border-bottom: solid 1px lightgray;
     background-color: #fff;
 }
-/* removes auto fill blue bg */
-.settingsForm > input:-webkit-autofill,
-.settingsForm > input:-webkit-autofill:hover,
-.settingsForm > input:-webkit-autofill:focus
- {
-  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
-}
 
 .settingsSubmit {
     width: 150px;
