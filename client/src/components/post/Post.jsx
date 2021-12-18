@@ -1,28 +1,30 @@
+import { Link } from 'react-router-dom'
 import './post.css'
 
-export default function Post() {
+export default function Post({post}) {
     return (
         <div className='post'>
-           <img 
-           className='postImg'
-           src="https://images.pexels.com/photos/10008380/pexels-photo-10008380.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" />
+            {post.photo && (
+                  <img 
+                  className='postImg'
+                  src={post.photo} alt="" />
+            )}
+        
            <div className="postInfo">
                <div className="postCats">
-                   <span className="postCat">Music</span>
-                   <span className="postCat">Life</span>
+                   {post.categories.map((c) => (
+                            <span className="postCat">{c.name}</span>
+                   ))}
+                   
                </div>
-               <div className="postTitle">Maxime doloribtibus sunt expedita</div>
+               <Link to={`/post/${post._id}`} className='link'>
+               <div className="postTitle">{post.title}</div>
+               </Link>
+               
                <hr/>
-               <span className="postDate">1 hour ago</span>
+               <span className="postDate">{new Date(post.createdAt).toDateString()}</span>
            </div>
-           <p className='postDesc'>
-               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea nuum quidem veritatis id, doloribus dolor niam magnam libero?
-               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea nuum quidem veritatis id, doloribus dolor niam magnam libero?
-               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea nuum quidem veritatis id, doloribus dolor niam magnam libero?
-               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea nuum quidem veritatis id, doloribus dolor niam magnam libero?
-               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea nuum quidem veritatis id, doloribus dolor niam magnam libero?
-               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea nuum quidem veritatis id, doloribus dolor niam magnam libero?
-           </p>
+           <p className='postDesc'>{post.desc}</p>
         </div>
     )
 }

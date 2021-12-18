@@ -6,7 +6,7 @@ import Settings from './pages/settings/Settings';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 function App() {
 	const user = false;
