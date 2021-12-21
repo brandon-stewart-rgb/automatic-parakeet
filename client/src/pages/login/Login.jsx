@@ -7,7 +7,7 @@ import './login.css'
 export default function Login() {
     const userRef = useRef();
     const passwordRef = useRef();
-    const {user, dispatch, isFetching} = useContext(Context);
+    const { dispatch, isFetching} = useContext(Context);
  
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,7 +23,7 @@ dispatch({type:'LOGIN_SUCCESS', payload:res.data });
             dispatch({type:'LOGIN_FAILURE' });
         }
     };
-    console.log(user);
+    
     return (
         <div className='login'>
            
@@ -33,7 +33,7 @@ dispatch({type:'LOGIN_SUCCESS', payload:res.data });
               <input type="text" className='loginInput' placeholder='Enter your username...' ref={userRef} />
               <label>Password</label>
               <input type="password" className='loginInput' placeholder='Enter your password...' ref={passwordRef}  />
-              <button className="loginButton" type='submit'>Login</button>
+              <button className="loginButton" type='submit' disabled={isFetching}>Login</button>
               <button className="loginRegisterButton">
                   <Link to='/register' className='link'>Register</Link>
               </button>

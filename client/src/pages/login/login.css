@@ -51,6 +51,10 @@
 	font-size: 14px;
 	font-family: 'Montserrat', sans-serif;
 }
+.loginButton:disabled {
+	cursor: not-allowed;
+	background-color:  rgb(240, 147, 147);
+}
 
 .loginRegisterButton {
 	padding: 10px;
