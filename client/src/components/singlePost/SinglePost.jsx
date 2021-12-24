@@ -21,16 +21,29 @@ export default function SinglePost() {
 		const getPost = async () => {
 			const res = await axios.get('/posts/' + path);
 			setPost(res.data);
+			setTitle(res.data.title);
+			setDesc(res.data.desc);
 		};
 		getPost();
 	}, [path]);
-
+	// delete post
 	const handleDelete = async () => {
 		try {
 			await axios.delete(`/posts/${post._id}`, {
 				data: { username: user.username },
 			});
 			window.location.replace('/');
+		} catch (err) {}
+	};
+	//update post
+	const handleUpdate = async () => {
+		try {
+			await axios.put(`/posts/${post._id}`, {
+				username: user.username,
+				title,
+				desc,
+			});
+			setUpdateMode(false);
 		} catch (err) {}
 	};
 
@@ -41,10 +54,16 @@ export default function SinglePost() {
 					<img src={PF + post.photo} alt="" className="singlePostImg" />
 				)}
 				{updateMode ? (
-					<input type="text" value={post.title} className="singlePostTitleInput" autoFocus />
+					<input
+						type="text"
+						value={title}
+						onChange={(e) => setTitle(e.target.value)}
+						className="singlePostTitleInput"
+						autoFocus
+					/>
 				) : (
 					<h1 className="singlePostTitle">
-						{post.title}
+						{title}
 						{/* if there is no user there won't be an error due to '?' */}
 						{post.username === user?.username && (
 							<div className="singlePostEdit">
@@ -72,12 +91,20 @@ export default function SinglePost() {
 						{new Date(post.createdAt).toDateString()}
 					</span>
 				</div>
-				{
-					updateMode ? (
-					<textarea className="singlePostDescInput" /> 
-					) : (
-						<p className="singlePostDesc"> {post.desc}</p>
-					)}
+				{updateMode ? (
+					<textarea
+						className="singlePostDescInput"
+						value={desc}
+						onChange={(e) => setDesc(e.target.value)}
+					/>
+				) : (
+					<p className="singlePostDesc">{desc}</p>
+				)}
+				{updateMode && (
+					<button className="singlePostButton" onClick={handleUpdate}>
+						Update
+					</button>
+				)}
 			</div>
 		</div>
 	);

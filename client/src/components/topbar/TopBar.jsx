@@ -7,10 +7,10 @@ export default function TopBar() {
 	// pseudo user
 	// const user = false;
 
-	const {user, dispatch} = useContext(Context);
+	const { user, dispatch } = useContext(Context);
 	const handleLogout = () => {
-		dispatch({type: 'LOGOUT'});
-	}
+		dispatch({ type: 'LOGOUT' });
+	};
 	return (
 		<div className="top">
 			<div className="topLeft">
@@ -41,16 +41,16 @@ export default function TopBar() {
 							write
 						</Link>
 					</li>
-					<li className="topListItem" onClick={handleLogout}>{user && 'LOGOUT'}</li>
+					<li className="topListItem" onClick={handleLogout}>
+						{user && 'LOGOUT'}
+					</li>
 				</ul>
 			</div>
 			<div className="topRight">
 				{user ? (
-					<img
-						className="topImg"
-						src={user.profilePic}
-						alt="pexels"
-					/>
+				<Link to='/settings'>
+					<img className="topImg" src={user.profilePic} alt={user} />
+				</Link>
 				) : (
 					<ul className="topList">
 						<li className="topListItem">
