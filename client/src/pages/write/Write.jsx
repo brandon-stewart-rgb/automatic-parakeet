@@ -5,7 +5,8 @@ import { Context } from '../../context/Context';
 
 export default function Write() {
 	const [title, setTitle] = useState('');
-	const [desc, setDesc] = useState('');
+	const [categories, setName] = useState('');
+ 	const [desc, setDesc] = useState('');
 	const [file, setFile] = useState(null);
 	const { user } = useContext(Context);
 
@@ -15,7 +16,9 @@ export default function Write() {
 			username: user.username,
 			title,
 			desc,
+			categories,
 		};
+		
 		if (file) {
 			const data = new FormData();
 			// using Date.now() for file number
@@ -31,6 +34,10 @@ export default function Write() {
 			const res = await axios.post('/posts', newPost);
 			window.location.replace('/post/' + res.data._id);
 		} catch (err) {}
+		// try {
+		// 	const res = await axios.post('/posts',  newCat);
+		// 	window.location.replace('/post/' + res.data._id);
+		// } catch (err) {}
 	};
 	return (
 		<div className="write">
@@ -55,6 +62,13 @@ export default function Write() {
 						className="writeInput"
 						autoFocus={true}
 						onChange={(e) => setTitle(e.target.value)}
+					/>
+					<input
+						type="text"
+						placeholder="Category Name"
+						className="writeInput"
+						
+						onChange={(e) => setName(e.target.value)}
 					/>
 				</div>
 				<div className="writeFormGroup">
